@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CSharpCompProgrammingTemplate.Helpers;
+using System;
+using System.Threading;
 
 namespace CSharpCompProgrammingTemplate
 {
@@ -6,7 +8,11 @@ namespace CSharpCompProgrammingTemplate
     {
         private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ConsoleHelpers.Time(() =>
+            {
+                Console.WriteLine("Hello World!");
+                Thread.Sleep(1000);
+            });
         }
     }
 }
