@@ -5,18 +5,17 @@ namespace CSharpCompProgrammingTemplate.Helpers
 {
     public static class ConsoleHelpers
     {
-        public static void Time(Action action, bool pauseAtFinish = false)
+        public static string Time<T>(Func<T> action)
         {
             var timer = new Timer();
 
-            action();
+            var result = action();
 
             Console.WriteLine($"Elapsed: {timer.Interval}ms");
             timer.Stop();
             timer.Dispose();
 
-            if (pauseAtFinish)
-                Console.ReadLine();
+            return result.ToString();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using CSharpCompProgrammingTemplate.Helpers;
 using System;
-using System.Threading;
+using System.IO;
 
 namespace CSharpCompProgrammingTemplate
 {
@@ -8,11 +8,18 @@ namespace CSharpCompProgrammingTemplate
     {
         private static void Main(string[] args)
         {
-            ConsoleHelpers.Time(() =>
-            {
-                Console.WriteLine("Hello World!");
-                Thread.Sleep(1000);
-            });
+            var input = InputConverters.Grid();
+
+            var result = ConsoleHelpers.Time(() =>
+            MinPathSum(input));
+
+            Console.WriteLine(result);
+            File.WriteAllText("../../../output.txt", result.ToString());
+        }
+
+        public static int MinPathSum(int[][] grid)
+        {
+            return 5;
         }
     }
 }
