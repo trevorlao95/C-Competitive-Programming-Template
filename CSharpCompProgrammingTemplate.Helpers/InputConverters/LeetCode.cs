@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CSharpCompProgrammingTemplate.Helpers
 {
-    public static class InputConverters
+    public static class LeetCode
     {
         public static int[][] Grid()
         {

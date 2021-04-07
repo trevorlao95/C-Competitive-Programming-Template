@@ -8,13 +8,9 @@ namespace CSharpCompProgrammingTemplate
     {
         private static void Main(string[] args)
         {
-            var input = InputConverters.Grid();
+            var input = LeetCode.Grid();
 
-            var result = ConsoleHelpers.Time(() =>
-            MinPathSum(input));
-
-            Console.WriteLine(result);
-            File.WriteAllText("../../../output.txt", result.ToString());
+            QuestionHelpers.Time(() => MinPathSum(input));
         }
 
         public static int MinPathSum(int[][] grid)

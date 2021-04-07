@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSharpCompProgrammingTemplate\CSharpCompProgrammingTemplate.Console.csproj" />
+    <ProjectReference Include="..\CSharpCompProgrammingTemplate.Console\CSharpCompProgrammingTemplate.Console.csproj" />
   </ItemGroup>
 
 </Project>
