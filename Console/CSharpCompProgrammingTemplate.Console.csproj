@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CSharpCompProgrammingTemplate.Helpers\CSharpCompProgrammingTemplate.Helpers.csproj" />
+    <ProjectReference Include="..\Helpers\CSharpCompProgrammingTemplate.Helpers.csproj" />
   </ItemGroup>
 
 </Project>
