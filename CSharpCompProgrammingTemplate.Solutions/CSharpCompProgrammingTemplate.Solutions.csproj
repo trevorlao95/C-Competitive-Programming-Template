@@ -9,8 +9,4 @@
     <ProjectReference Include="..\CSharpCompProgrammingTemplate.Helpers\CSharpCompProgrammingTemplate.Helpers.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Leetcode\" />
-  </ItemGroup>
-
 </Project>
