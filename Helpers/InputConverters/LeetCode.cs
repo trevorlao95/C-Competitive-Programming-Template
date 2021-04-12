@@ -93,7 +93,7 @@ namespace CSharpCompProgrammingTemplate.Helpers
         /// <returns></returns>
         public static string String(int row = 0)
         {
-            return _inputRows[row];
+            return _inputRows[row].Trim('"');
         }
 
         /// <summary>
