@@ -1,5 +1,7 @@
 ﻿using CSharpCompProgrammingTemplate.Helpers;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CSharpCompProgrammingTemplate
 {
@@ -9,7 +11,7 @@ namespace CSharpCompProgrammingTemplate
 
         private static void Main(string[] args)
         {
-            QuestionHelpers.Time(() => new Solution().NumDecodings(LeetCode.String()));
+            QuestionHelpers.Time(() => new Solution().SplitArray(LeetCode.Array(), LeetCode.Int()));
         }
 
         #endregion Main
@@ -18,26 +20,39 @@ namespace CSharpCompProgrammingTemplate
 
         public class Solution
         {
-            public int NumDecodings(string s)
+            public int SplitArray(int[] nums, int m)
             {
-                var dp = new int[s.Length + 1];
+                var left = nums.Max();
+                var right = nums.Sum();
 
-                dp[0] = 1;
-                dp[1] = s[0] == '0' ? 0 : 1;
-
-                for (int i = 2; i <= s.Length; i++)
+                while (left < right)
                 {
-                    var firstDigit = s[i - 1];
-                    var twoDigits = int.Parse(new string(new char[] { s[i - 2], s[i - 1] }));
-
-                    if (char.GetNumericValue(firstDigit) > 0)
-                        dp[i] += dp[i - 1];
-
-                    if (twoDigits >= 10 && twoDigits <= 26)
-                        dp[i] += dp[i - 2];
+                    var mid = left + (right - left) / 2;
+                    if (Feasible(mid, nums, m)) right = mid;
+                    else left = mid + 1;
                 }
 
-                return dp[s.Length];
+                return left;
+            }
+
+            public bool Feasible(int sum, int[] nums, int maxSubaArrays)
+            {
+                var total = 0;
+                var subArrays = 1;
+
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    if (total + nums[i] > sum)
+                    {
+                        subArrays++;
+                        total = nums[i];
+                    }
+                    else
+                        total += nums[i];
+
+                    if (subArrays > maxSubaArrays) return false;
+                }
+                return true;
             }
         }
 

@@ -10,7 +10,17 @@ namespace CSharpCompProgrammingTemplate.Helpers
     {
         #region Fields
 
-        private static string[] _inputRows = GetInput();
+        private static readonly string[] _inputRows = GetInput();
+        private static int _row = -1;
+
+        private static int Row
+        {
+            get
+            {
+                _row++;
+                return _row;
+            }
+        }
 
         #endregion Fields
 
@@ -19,15 +29,13 @@ namespace CSharpCompProgrammingTemplate.Helpers
         /// <summary>
         /// e.g. [[1,3,1],[1,5,1],[4,2,1]]
         /// </summary>
-        /// <param name="row">Input row line</param>
-        /// <returns></returns>
-        public static int[][] Grid(int row = 0)
+        public static int[][] Grid()
         {
             var result = new List<int[]>();
             var currentRow = new List<int>();
             var currentNumber = string.Empty;
 
-            foreach (var c in _inputRows[row])
+            foreach (var c in _inputRows[Row])
             {
                 if (char.IsDigit(c))
                     currentNumber += c;
@@ -51,14 +59,12 @@ namespace CSharpCompProgrammingTemplate.Helpers
         /// <summary>
         /// e.g. [2,1,6,4]
         /// </summary>
-        /// <param name="row">Input row line</param>
-        /// <returns></returns>
-        public static int[] Array(int row = 0)
+        public static int[] Array()
         {
             var result = new List<int>();
             var currentNumber = string.Empty;
 
-            foreach (var c in _inputRows[row])
+            foreach (var c in _inputRows[Row])
             {
                 if (char.IsDigit(c))
                     currentNumber += c;
@@ -79,29 +85,24 @@ namespace CSharpCompProgrammingTemplate.Helpers
         /// <summary>
         /// e.g. 3
         /// </summary>
-        /// <param name="row">Input row line</param>
-        /// <returns></returns>
-        public static int Int(int row = 0)
+        public static int Int()
         {
-            return int.Parse(_inputRows[row]);
+            return int.Parse(_inputRows[Row]);
         }
 
         /// <summary>
         /// e.g. "word"
         /// </summary>
-        /// <param name="row">Input row line</param>
-        /// <returns></returns>
-        public static string String(int row = 0)
+        public static string String()
         {
-            return _inputRows[row].Trim('"');
+            return _inputRows[Row].Trim('"');
         }
 
         /// <summary>
         /// e.g. 3
         ///      4
         /// </summary>
-        /// <returns></returns>
-        public static int[] IntArray()
+        public static int[] AllIntArray()
         {
             var result = new List<int>();
 
@@ -120,7 +121,6 @@ namespace CSharpCompProgrammingTemplate.Helpers
         /// <summary>
         /// Gets input from input.txt as a string array
         /// </summary>
-        /// <returns></returns>
         private static string[] GetInput()
         {
             return File.ReadAllLines("../../../input.txt");
