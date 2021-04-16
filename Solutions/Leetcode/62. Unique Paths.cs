@@ -9,7 +9,7 @@ namespace CSharpCompProgrammingTemplate
 
         private static void Main(string[] args)
         {
-            QuestionHelpers.Time(() => new Solution().UniquePaths(LeetCode.Int(), LeetCode.Int(1)));
+            QuestionHelpers.Time(() => new Solution().UniquePaths(LeetCode.Int(), LeetCode.Int()));
         }
 
         #endregion Main
