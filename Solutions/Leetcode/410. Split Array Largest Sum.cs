@@ -1,11 +1,9 @@
 ﻿using CSharpCompProgrammingTemplate.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CSharpCompProgrammingTemplate
 {
-    public class Program
+    public class SplitArray
     {
         #region Main
 

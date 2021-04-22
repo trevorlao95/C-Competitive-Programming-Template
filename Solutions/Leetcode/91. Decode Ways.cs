@@ -1,9 +1,8 @@
 ﻿using CSharpCompProgrammingTemplate.Helpers;
-using System.Collections.Generic;
 
 namespace CSharpCompProgrammingTemplate
 {
-    public class Program
+    public class NumDecodings
     {
         #region Main
 

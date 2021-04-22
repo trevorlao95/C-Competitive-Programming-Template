@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace CSharpCompProgrammingTemplate
 {
-    public class Program
+    public class MinPathSum
     {
         #region Main
 
