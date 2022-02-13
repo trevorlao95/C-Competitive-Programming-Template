@@ -29,25 +29,26 @@ namespace CSharpCompProgrammingTemplate.Helpers
         /// <summary>
         /// e.g. [[1,3,1],[1,5,1],[4,2,1]]
         /// </summary>
-        public static int[][] Grid()
+        public static int[][] IntGrid()
         {
             var result = new List<int[]>();
             var currentRow = new List<int>();
-            var currentNumber = string.Empty;
+            StringBuilder sb = new StringBuilder();
 
             foreach (var c in _inputRows[Row])
             {
                 if (char.IsDigit(c))
-                    currentNumber += c;
-                else if (c == ',' && currentNumber != string.Empty)
+                    sb.Append(c);
+                else if (c == ',' && sb.Length != 0)
                 {
-                    currentRow.Add(int.Parse(currentNumber));
-                    currentNumber = string.Empty;
+                    currentRow.Add(int.Parse(sb.ToString()));
+                    sb.Clear();
                 }
-                else if (c == ']' && currentNumber != string.Empty)
+                else if (c == ']' && sb.Length != 0)
                 {
-                    currentRow.Add(int.Parse(currentNumber));
-                    currentNumber = string.Empty;
+                    currentRow.Add(int.Parse(sb.ToString()));
+                    sb.Clear();
+
                     result.Add(currentRow.ToArray());
                     currentRow = new List<int>();
                 }
@@ -61,21 +62,28 @@ namespace CSharpCompProgrammingTemplate.Helpers
         /// </summary>
         public static int[] Array()
         {
+            var currentRow = Row;
             var result = new List<int>();
-            var currentNumber = string.Empty;
+            StringBuilder sb = new StringBuilder();
 
-            foreach (var c in _inputRows[Row])
+            for (int i = 0; i < _inputRows[currentRow].Length; i++)
             {
+                var c = _inputRows[currentRow][i];
+
                 if (char.IsDigit(c))
-                    currentNumber += c;
-                else if (c == ',' && currentNumber != string.Empty)
                 {
-                    result.Add(int.Parse(currentNumber));
-                    currentNumber = string.Empty;
+                    sb.Append(c);
                 }
-                else if (c == ']' && currentNumber != string.Empty)
+                // Terminators
+                else if ((c == ',' || c == ']' || i == _inputRows[currentRow].Length - 1) && sb.Length != 0)
                 {
-                    result.Add(int.Parse(currentNumber));
+                    result.Add(int.Parse(sb.ToString()));
+                    sb.Clear();
+                }
+                // Negative
+                else if (c == '-' && sb.Length == 0)
+                {
+                    sb.Append('-');
                 }
             }
 

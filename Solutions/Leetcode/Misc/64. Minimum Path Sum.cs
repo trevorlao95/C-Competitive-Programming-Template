@@ -10,7 +10,7 @@ namespace CSharpCompProgrammingTemplate
 
         private static void Main(string[] args)
         {
-            QuestionHelpers.Time(() => new Solution().MinPathSum(LeetCode.Grid()));
+            QuestionHelpers.Time(() => new Solution().MinPathSum(LeetCode.IntGrid()));
         }
 
         #endregion Main
