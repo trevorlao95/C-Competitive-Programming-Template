@@ -26,6 +26,11 @@ namespace CSharpCompProgrammingTemplate.Helpers
 
         #region Public Methods
 
+        public static bool MoreColumns()
+        {
+            return _row != _inputRows.Length - 1;
+        }
+
         /// <summary>
         /// e.g. [[1,3,1],[1,5,1],[4,2,1]]
         /// </summary>
