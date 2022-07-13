@@ -14,7 +14,7 @@ namespace CSharpCompProgrammingTemplate
             var solution = new Solution();
 
             while (LeetCode.MoreColumns())
-                QuestionHelpers.Time(() => solution.MinDifficulty(LeetCode.Array(), LeetCode.Int()));
+                QuestionHelpers.Time(() => solution.CoinChange(LeetCode.Array(), LeetCode.Int()));
         }
 
         #endregion Main
@@ -23,34 +23,24 @@ namespace CSharpCompProgrammingTemplate
 
         public class Solution
         {
-            public int MinDifficulty(int[] jobDifficulty, int d)
+            public int CoinChange(int[] coins, int amount)
             {
-                if (jobDifficulty.Length < d)
-                    return -1;
+                if (amount == 0)
+                    return 0;
 
-                return dp(jobDifficulty, d, 0, new Dictionary<(int, int), int>());
-            }
+                var dp = Enumerable.Repeat(amount + 1, amount + 1).ToArray();
+                dp[0] = 0;
 
-            private int dp(int[] jobDifficulty, int day, int cut, Dictionary<(int, int), int> memo)
-            {
-                if (memo.ContainsKey((day, cut)))
-                    return memo[(day, cut)];
-
-                if (day == 1)
-                    return jobDifficulty.Skip(cut).Max();
-
-                var maxSoFar = 0;
-                var answer = int.MaxValue;
-
-                for (int i = cut; i < jobDifficulty.Length - day + 1; i++)
+                for (int i = 0; i < coins.Length; i++)
                 {
-                    maxSoFar = Math.Max(maxSoFar, jobDifficulty[i]);
-                    answer = Math.Min(answer, maxSoFar + dp(jobDifficulty, day - 1, i + 1, memo));
+                    for (int j = 0; j < dp.Length; j++)
+                    {
+                        if (coins[i] <= j)
+                            dp[j] = Math.Min(dp[j], dp[j - coins[i]] + 1);
+                    }
                 }
 
-                memo[(day, cut)] = answer;
-
-                return answer;
+                return dp[amount] > amount ? -1 : dp[amount];
             }
         }
 
