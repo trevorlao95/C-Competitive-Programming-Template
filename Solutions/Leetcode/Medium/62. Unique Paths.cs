@@ -26,40 +26,31 @@ namespace CSharpCompProgrammingTemplate
              * • String
              * **/
 
-            MinFallingPathSum(IntGrid()));
+            UniquePaths(Int(), Int()));
         }
 
         #region Solution
 
         public class Solution
         {
-            public int MinFallingPathSum(int[][] grid)
+            public int UniquePaths(int m, int n)
             {
-                var dp = new int[grid.Length, grid[0].Length];
-                var lowest = int.MaxValue;
+                var dp = new int[m, n];
 
-                if (grid.Length == 1 || grid[0].Length == 1)
-                    return grid.SelectMany(x => x).Min();
-
-                for (int i = 0; i < grid.Length; i++)
+                for (int i = 0; i < m; i++)
                 {
-                    for (int j = 0; j < grid[i].Length; j++)
+                    for (int j = 0; j < n; j++)
                     {
                         if (i == 0)
-                            dp[i, j] = grid[i][j];
+                            dp[i, j] = 1;
                         else if (j == 0)
-                            dp[i, j] = Math.Min(dp[i - 1, j], dp[i - 1, j + 1]) + grid[i][j];
-                        else if (j == grid[i].Length - 1)
-                            dp[i, j] = Math.Min(dp[i - 1, j], dp[i - 1, j - 1]) + grid[i][j];
+                            dp[i, j] = 1;
                         else
-                            dp[i, j] = Math.Min(Math.Min(dp[i - 1, j - 1], dp[i - 1, j]), dp[i - 1, j + 1]) + grid[i][j];
-
-                        if (i == grid.Length - 1)
-                            lowest = Math.Min(lowest, dp[i, j]);
+                            dp[i, j] = dp[i - 1, j] + dp[i, j - 1];
                     }
                 }
 
-                return lowest;
+                return dp[m - 1, n - 1];
             }
         }
     }

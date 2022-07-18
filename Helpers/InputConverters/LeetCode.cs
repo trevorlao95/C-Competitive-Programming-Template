@@ -57,6 +57,11 @@ namespace CSharpCompProgrammingTemplate.Helpers
                     result.Add(currentRow.ToArray());
                     currentRow = new List<int>();
                 }
+                // Negative
+                else if (c == '-' && sb.Length == 0)
+                {
+                    sb.Append('-');
+                }
             }
 
             return result.ToArray();
