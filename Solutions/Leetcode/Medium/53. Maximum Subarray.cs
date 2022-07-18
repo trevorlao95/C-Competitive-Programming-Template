@@ -1,7 +1,5 @@
 ﻿using CSharpCompProgrammingTemplate.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace CSharpCompProgrammingTemplate
 {
@@ -35,23 +33,18 @@ namespace CSharpCompProgrammingTemplate
         {
             public int MaxSubarraySumCircular(int[] nums)
             {
-                var currentMax = 0;
-                var bestMax = int.MinValue;
-                var currentMin = 0;
-                var bestMin = int.MaxValue;
-                var total = 0;
+                var current = 0;
+                var best = 0;
 
                 for (int i = 0; i < nums.Length; i++)
                 {
-                    currentMax = Math.Max(nums[i], currentMax + nums[i]);
-                    bestMax = Math.Max(currentMax, bestMax);
-
-                    currentMin = Math.Min(nums[i], currentMin + nums[i]);
-                    bestMin = Math.Min(currentMin, bestMin);
-                    total += nums[i];
                 }
 
-                return bestMax > 0 ? Math.Max(bestMax, total - bestMin) : bestMax;
+                for (int i = 0; i < nums.Length; i++)
+                {
+                }
+
+                return best;
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CSharpCompProgrammingTemplate.Helpers
 {
-    public static class LeetCode
+    public abstract class LeetCode
     {
         #region Fields
 
@@ -65,7 +65,7 @@ namespace CSharpCompProgrammingTemplate.Helpers
         /// <summary>
         /// e.g. [2,1,6,4]
         /// </summary>
-        public static int[] Array()
+        public static int[] IntArray()
         {
             var currentRow = Row;
             var result = new List<int>();
@@ -89,6 +89,34 @@ namespace CSharpCompProgrammingTemplate.Helpers
                 else if (c == '-' && sb.Length == 0)
                 {
                     sb.Append('-');
+                }
+            }
+
+            return result.ToArray();
+        }
+
+        /// <summary>
+        /// e.g. ["leet", "code"]
+        /// </summary>
+        public static string[] StringArray()
+        {
+            var currentRow = Row;
+            var result = new List<string>();
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < _inputRows[currentRow].Length; i++)
+            {
+                var c = _inputRows[currentRow][i];
+
+                if (char.IsLetter(c))
+                {
+                    sb.Append(c);
+                }
+                // Terminators
+                else if ((c == ',' || c == ']' || i == _inputRows[currentRow].Length - 1) && sb.Length != 0)
+                {
+                    result.Add(sb.ToString());
+                    sb.Clear();
                 }
             }
 
