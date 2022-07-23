@@ -26,28 +26,32 @@ namespace CSharpCompProgrammingTemplate
              * • String
              * **/
 
-            ValidTree(Int(), IntGrid()));
+            FindCircleNum(IntGrid()));
         }
 
         #region Solution
 
         public class Solution
         {
-            public bool ValidTree(int n, int[][] edges)
+            public int FindCircleNum(int[][] isConnected)
             {
-                Init(n);
+                Init(isConnected.Length);
 
-                _valid = true;
+                _provinces = isConnected.Length;
 
-                for (int i = 0; i < edges.Length; i++)
+                for (int i = 0; i < isConnected.Length; i++)
                 {
-                    Union(edges[i][0], edges[i][1]);
+                    for (int j = 0; j < isConnected[i].Length; j++)
+                    {
+                        if (isConnected[i][j] == 1)
+                            Union(i, j);
+                    }
                 }
 
-                return _valid && _root.GroupBy(x => Find(x)).Count() == 1;
+                return _provinces;
             }
 
-            private bool _valid;
+            private int _provinces;
             private int[] _root;
             private int[] _rank;
 
@@ -78,6 +82,8 @@ namespace CSharpCompProgrammingTemplate
 
                 if (rootX != rootY)
                 {
+                    _provinces--;
+
                     if (_rank[rootX] > _rank[rootY])
                         _root[rootY] = rootX;
                     else if (_rank[rootX] < _rank[rootY])
@@ -88,8 +94,6 @@ namespace CSharpCompProgrammingTemplate
                         _rank[rootX] += 1;
                     }
                 }
-                else
-                    _valid = false;
             }
 
             public bool Connected(int x, int y)
