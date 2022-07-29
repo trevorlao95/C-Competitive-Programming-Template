@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
+using System.Linq;
 using System.Text;
 
 namespace CSharpCompProgrammingTemplate.Helpers
 {
     public abstract class LeetCode
     {
-        #region Fields
+        #region Private Fields
 
         private static readonly string[] _inputRows = GetInput();
         private static int _row = -1;
@@ -22,7 +21,7 @@ namespace CSharpCompProgrammingTemplate.Helpers
             }
         }
 
-        #endregion Fields
+        #endregion Private Fields
 
         #region Public Methods
 
@@ -31,40 +30,24 @@ namespace CSharpCompProgrammingTemplate.Helpers
             return _row != _inputRows.Length - 1;
         }
 
+        #endregion Public Methods
+
+        #region LeetCode Methods
+
         /// <summary>
-        /// e.g. [[1,3,1],[1,5,1],[4,2,1]]
+        /// e.g. 3
         /// </summary>
-        public static int[][] IntGrid()
+        public static int Int()
         {
-            var result = new List<int[]>();
-            var currentRow = new List<int>();
-            StringBuilder sb = new StringBuilder();
+            return int.Parse(_inputRows[Row]);
+        }
 
-            foreach (var c in _inputRows[Row])
-            {
-                if (char.IsDigit(c))
-                    sb.Append(c);
-                else if (c == ',' && sb.Length != 0)
-                {
-                    currentRow.Add(int.Parse(sb.ToString()));
-                    sb.Clear();
-                }
-                else if (c == ']' && sb.Length != 0)
-                {
-                    currentRow.Add(int.Parse(sb.ToString()));
-                    sb.Clear();
-
-                    result.Add(currentRow.ToArray());
-                    currentRow = new List<int>();
-                }
-                // Negative
-                else if (c == '-' && sb.Length == 0)
-                {
-                    sb.Append('-');
-                }
-            }
-
-            return result.ToArray();
+        /// <summary>
+        /// e.g. "word"
+        /// </summary>
+        public static string String()
+        {
+            return _inputRows[Row].Trim('"');
         }
 
         /// <summary>
@@ -81,9 +64,7 @@ namespace CSharpCompProgrammingTemplate.Helpers
                 var c = _inputRows[currentRow][i];
 
                 if (char.IsDigit(c))
-                {
                     sb.Append(c);
-                }
                 // Terminators
                 else if ((c == ',' || c == ']' || i == _inputRows[currentRow].Length - 1) && sb.Length != 0)
                 {
@@ -114,9 +95,7 @@ namespace CSharpCompProgrammingTemplate.Helpers
                 var c = _inputRows[currentRow][i];
 
                 if (char.IsLetter(c))
-                {
                     sb.Append(c);
-                }
                 // Terminators
                 else if ((c == ',' || c == ']' || i == _inputRows[currentRow].Length - 1) && sb.Length != 0)
                 {
@@ -129,26 +108,42 @@ namespace CSharpCompProgrammingTemplate.Helpers
         }
 
         /// <summary>
-        /// e.g. 3
+        /// e.g. [[1,3,1],[1,5,1],[4,2,1]]
         /// </summary>
-        public static int Int()
+        public static List<IList<int>> IntGridList()
         {
-            return int.Parse(_inputRows[Row]);
+            return GetGrid().ConvertAll(x => (IList<int>)x);
         }
 
         /// <summary>
-        /// e.g. "word"
+        /// e.g. [[1,3,1],[1,5,1],[4,2,1]]
         /// </summary>
-        public static string String()
+        public static int[][] IntGridArray()
         {
-            return _inputRows[Row].Trim('"');
+            return GetGrid().Select(x => x.Select(x => int.Parse(x)).ToArray()).ToArray();
+        }
+
+        /// <summary>
+        /// e.g. [["leet"],["code"]]
+        /// </summary>
+        public static List<IList<string>> StringGridList()
+        {
+            return GetGrid();
+        }
+
+        /// <summary>
+        /// e.g. [["leet"],["code"]]
+        /// </summary>
+        public static string[][] StringGridArray()
+        {
+            return GetGrid().Select(x => x.ToArray()).ToArray();
         }
 
         /// <summary>
         /// e.g. 3
         ///      4
         /// </summary>
-        public static int[] AllIntArray()
+        public static int[] VerticalIntArray()
         {
             var result = new List<int>();
 
@@ -160,7 +155,36 @@ namespace CSharpCompProgrammingTemplate.Helpers
             return result.ToArray();
         }
 
-        #endregion Public Methods
+        #endregion LeetCode Methods
+
+        #region LeetCode Structures
+
+        /// Leetcode Supplied Node Class
+        public class Node
+        {
+            public int val { get; }
+            public IList<Node> neighbors { get; }
+
+            public Node()
+            {
+                val = 0;
+                neighbors = new List<Node>();
+            }
+
+            public Node(int _val)
+            {
+                val = _val;
+                neighbors = new List<Node>();
+            }
+
+            public Node(int _val, List<Node> _neighbors)
+            {
+                val = _val;
+                neighbors = _neighbors;
+            }
+        }
+
+        #endregion LeetCode Structures
 
         #region Private Methods
 
@@ -170,6 +194,35 @@ namespace CSharpCompProgrammingTemplate.Helpers
         private static string[] GetInput()
         {
             return File.ReadAllLines("../../../input.txt");
+        }
+
+        private static List<IList<string>> GetGrid()
+        {
+            var result = new List<IList<string>>();
+            var currentRow = new List<string>();
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var c in _inputRows[Row].Replace("\"", ""))
+            {
+                if (char.IsLetter(c) || char.IsDigit(c))
+                    sb.Append(c);
+                else if (c == '-' && sb.Length == 0)
+                    sb.Append('-');
+                else if (sb.Length != 0)
+                {
+                    currentRow.Add(sb.ToString());
+                    sb.Clear();
+
+                    if (c == ']')
+                    {
+                        result.Add(currentRow);
+                        currentRow = new List<string>();
+                    }
+                }
+            }
+
+            return result;
         }
 
         #endregion Private Methods

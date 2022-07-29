@@ -34,6 +34,7 @@ namespace CSharpCompProgrammingTemplate.Snippets.Graph_Theory.DisjointSet
             int rootX = Find(x);
             int rootY = Find(y);
 
+            // Combine two separate groups
             if (rootX != rootY)
             {
                 if (_rank[rootX] > _rank[rootY])
@@ -42,6 +43,7 @@ namespace CSharpCompProgrammingTemplate.Snippets.Graph_Theory.DisjointSet
                     _root[rootX] = _root[rootY];
                 else
                 {
+                    // Groups have identical rank
                     _root[rootY] = rootX;
                     _rank[rootX] += 1;
                 }

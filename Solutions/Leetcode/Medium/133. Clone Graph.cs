@@ -27,16 +27,32 @@ namespace CSharpCompProgrammingTemplate
              * • String
              * **/
 
-            FindItinerary(StringGridList()));
+            CloneGraph());
         }
 
         #region Solution
 
         public class Solution
         {
-            public IList<string> FindItinerary(IList<IList<string>> tickets)
+            private Dictionary<Node, Node> visited = new Dictionary<Node, Node>();
+
+            public Node CloneGraph(Node node)
             {
-                return new List<string>() { "test" };
+                if (node == null)
+                    return node;
+
+                if (visited.ContainsKey(node))
+                    return visited[node];
+
+                var cloneNode = new Node(node.val, new List<Node>());
+                visited.Add(node, cloneNode);
+
+                for (int i = 0; i < node.neighbors.Count; i++)
+                {
+                    cloneNode.neighbors.Add(CloneGraph(node.neighbors[i]));
+                }
+
+                return cloneNode;
             }
         }
     }

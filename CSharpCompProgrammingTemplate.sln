@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpCompProgrammingTempla
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpCompProgrammingTemplate.Console", "Console\CSharpCompProgrammingTemplate.Console.csproj", "{043C4A5B-80B3-4523-A1AB-B2F1851A23EC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpCompProgrammingTemplate.Snippets", "Snippets\CSharpCompProgrammingTemplate.Snippets.csproj", "{E693962B-448D-4D35-9D69-901848B24C6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpCompProgrammingTemplate.Theory", "Snippets\CSharpCompProgrammingTemplate.Theory.csproj", "{E693962B-448D-4D35-9D69-901848B24C6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
