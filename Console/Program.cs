@@ -17,16 +17,6 @@ namespace CSharpCompProgrammingTemplate
 
             #endregion Main
 
-            /**
-             * Change method and inputs here, possible values:
-             * • Int
-             * • IntGrid
-             * • IntArray
-             * • AllIntArray
-             * • StringArray
-             * • String
-             * **/
-
             FindItinerary(StringGridList()));
         }
 
