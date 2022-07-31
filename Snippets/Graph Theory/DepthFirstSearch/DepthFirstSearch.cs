@@ -6,6 +6,11 @@ namespace CSharpCompProgrammingTemplate.Theory.Graph_Theory.DepthFirstSearch
 {
     public class DepthFirstSearch
     {
+        /// <summary>
+        /// Standard with size given
+        /// </summary>
+        /// <param name="n">Number of vertices</param>
+        /// <param name="edges">Edges</param>
         public void Standard(int n, int[][] edges)
         {
             var adjacencyList = new List<List<int>>();
@@ -50,7 +55,12 @@ namespace CSharpCompProgrammingTemplate.Theory.Graph_Theory.DepthFirstSearch
             }
         }
 
-        // To find paths
+        /// <summary>
+        /// Recursive to trace a path w/o seen list (directed graph)
+        /// </summary>
+        /// <param name="graph">Adjacency list</param>
+        /// <param name="node">current node</param>
+        /// <param name="path">path so far</param>
         public void Recursive(int[][] graph, int node, List<int> path)
         {
             path.Add(node);
@@ -60,6 +70,54 @@ namespace CSharpCompProgrammingTemplate.Theory.Graph_Theory.DepthFirstSearch
                 Recursive(graph, graph[node][i], path);
                 path.Remove(path.Count - 1);
             }
+        }
+
+        /// <summary>
+        /// Backtracking
+        /// </summary>
+
+        #region Backtracking variables
+
+        private List<List<string>> _tickets;
+        private List<string> _results;
+        private Dictionary<string, List<string>> _adjacencyList;
+        private Dictionary<string, bool[]> _visited;
+
+        #endregion Backtracking variables
+
+        public bool Backtracking(string origin, LinkedList<string> route)
+        {
+            // Reached the end
+            if (route.Count == _tickets.Count + 1)
+            {
+                _results = new List<string>(route);
+                return true;
+            }
+
+            if (!_adjacencyList.ContainsKey(origin))
+                return false;
+
+            var visited = _visited[origin];
+
+            for (int i = 0; i < _adjacencyList[origin].Count; i++)
+            {
+                var destination = _adjacencyList[origin][i];
+
+                if (!visited[i])
+                {
+                    visited[i] = true;
+                    route.AddLast(destination);
+
+                    var backtrack = Backtracking(destination, route);
+                    route.RemoveLast();
+                    visited[i] = false;
+
+                    if (backtrack)
+                        return true;
+                }
+            }
+
+            return false;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace CSharpCompProgrammingTemplate
                     _adjacencyList[edges[i][0]].Add(edges[i][1]);
                 }
 
-                if (_adjacencyList.ContainsKey(destination))
+                if (_adjacencyList.ContainsKey(source))
                     return false;
 
                 return DFS(source, destination, new bool[n]);

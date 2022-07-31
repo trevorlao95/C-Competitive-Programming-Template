@@ -1,2 +1,4 @@
-﻿[["MUC","LHR"],["JFK","MUC"],["SFO","SJC"],["LHR","SFO"]]
- [["JFK","SFO"],["JFK","ATL"],["SFO","ATL"],["ATL","JFK"],["ATL","SFO"]]
+﻿4
+[[0,1],[0,2],[1,3],[2,3]]
+0
+3
